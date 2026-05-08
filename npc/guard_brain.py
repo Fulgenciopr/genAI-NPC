@@ -2,7 +2,7 @@ from groq import Groq
 import os
 import json 
 from dotenv import load_dotenv
-import npc_prompts.prompts
+import npc_prompts.guard_prompts as gp
 
 load_dotenv()
 
@@ -13,9 +13,9 @@ client = Groq(api_key=GROQ_API_KEY)
 
 chat_completion = client.chat.completions.create(
     model = ai_model,
-
+    max_tokens= 1000,
     messages = [
-        {"role": "system", "content": "test"},
+        {"role": "system", "content": gp.main_prompt},
         {"role": "user", "content": "test"}
     ], 
 
